@@ -1,0 +1,95 @@
+
+1.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	800102b7          	lui	t0,0x80010
+   4:	01106a13          	ori	s4,zero,17
+   8:	0342a023          	sw	s4,32(t0) # 80010020 <__global_pointer$+0x8000e6e0>
+   c:	30502e73          	csrr	t3,mtvec
+  10:	03c2a223          	sw	t3,36(t0)
+  14:	00000417          	auipc	s0,0x0
+  18:	06c40413          	addi	s0,s0,108 # 80 <EXCEPTION_HANDLER>
+  1c:	30541073          	csrw	mtvec,s0
+  20:	0282a023          	sw	s0,32(t0)
+  24:	30502e73          	csrr	t3,mtvec
+  28:	03c2a423          	sw	t3,40(t0)
+  2c:	00000d17          	auipc	s10,0x0
+  30:	078d0d13          	addi	s10,s10,120 # a4 <user>
+  34:	341d1073          	csrw	mepc,s10
+  38:	03a2a823          	sw	s10,48(t0)
+  3c:	34102e73          	csrr	t3,mepc
+  40:	03c2aa23          	sw	t3,52(t0)
+  44:	00002537          	lui	a0,0x2
+  48:	80050513          	addi	a0,a0,-2048 # 1800 <__BSS_END__+0x6c0>
+  4c:	30053073          	csrc	mstatus,a0
+  50:	00000097          	auipc	ra,0x0
+  54:	0b408093          	addi	ra,ra,180 # 104 <user_ret>
+  58:	00100a93          	li	s5,1
+  5c:	30200073          	mret
+  60:	001a8a93          	addi	s5,s5,1
+  64:	001a8a93          	addi	s5,s5,1
+  68:	001a8a93          	addi	s5,s5,1
+  6c:	001a8a93          	addi	s5,s5,1
+  70:	001a8a93          	addi	s5,s5,1
+  74:	001a8a93          	addi	s5,s5,1
+  78:	001a8a93          	addi	s5,s5,1
+  7c:	0152ac23          	sw	s5,24(t0)
+
+00000080 <EXCEPTION_HANDLER>:
+  80:	34011173          	csrrw	sp,mscratch,sp
+  84:	0152a023          	sw	s5,0(t0)
+  88:	0072a223          	sw	t2,4(t0)
+  8c:	0162a423          	sw	s6,8(t0)
+  90:	0172a623          	sw	s7,12(t0)
+  94:	30200073          	mret
+  98:	23306e13          	ori	t3,zero,563
+  9c:	05c2a823          	sw	t3,80(t0)
+  a0:	09c0006f          	j	13c <done>
+
+000000a4 <user>:
+  a4:	30502e73          	csrr	t3,mtvec
+  a8:	01c2ae23          	sw	t3,28(t0)
+  ac:	02206a13          	ori	s4,zero,34
+  b0:	0142aa23          	sw	s4,20(t0)
+  b4:	44406393          	ori	t2,zero,1092
+  b8:	34102e73          	csrr	t3,mepc
+  bc:	03c2ac23          	sw	t3,56(t0)
+  c0:	34202e73          	csrr	t3,mcause
+  c4:	05c2a023          	sw	t3,64(t0)
+  c8:	00000e17          	auipc	t3,0x0
+  cc:	05c2aa23          	sw	t3,84(t0)
+  d0:	00000073          	ecall
+  d4:	34202e73          	csrr	t3,mcause
+  d8:	05c2a223          	sw	t3,68(t0)
+  dc:	34102e73          	csrr	t3,mepc
+  e0:	03c2ae23          	sw	t3,60(t0)
+  e4:	00100b13          	li	s6,1
+  e8:	001b0b13          	addi	s6,s6,1
+  ec:	001b0b13          	addi	s6,s6,1
+  f0:	001b0b13          	addi	s6,s6,1
+  f4:	001b0b13          	addi	s6,s6,1
+  f8:	001b0b13          	addi	s6,s6,1
+  fc:	001b0b13          	addi	s6,s6,1
+ 100:	001b0b13          	addi	s6,s6,1
+
+00000104 <user_ret>:
+ 104:	55506393          	ori	t2,zero,1365
+ 108:	07700b93          	li	s7,119
+ 10c:	020a8a93          	addi	s5,s5,32
+ 110:	001a8a93          	addi	s5,s5,1
+ 114:	001a8a93          	addi	s5,s5,1
+ 118:	001a8a93          	addi	s5,s5,1
+ 11c:	001a8a93          	addi	s5,s5,1
+ 120:	001a8a93          	addi	s5,s5,1
+ 124:	001a8a93          	addi	s5,s5,1
+ 128:	001a8a93          	addi	s5,s5,1
+ 12c:	0152a023          	sw	s5,0(t0)
+ 130:	0072a223          	sw	t2,4(t0)
+ 134:	0162a423          	sw	s6,8(t0)
+ 138:	0172a623          	sw	s7,12(t0)
+
+0000013c <done>:
+ 13c:	66600393          	li	t2,1638

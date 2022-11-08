@@ -1,0 +1,43 @@
+
+1.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	00106293          	ori	t0,zero,1
+   4:	00106313          	ori	t1,zero,1
+   8:	00406493          	ori	s1,zero,4
+   c:	80002f37          	lui	t5,0x80002
+  10:	7fcf0f13          	addi	t5,t5,2044 # 800027fc <__global_pointer$+0x80000f84>
+  14:	80002537          	lui	a0,0x80002
+  18:	10050513          	addi	a0,a0,256 # 80002100 <__global_pointer$+0x80000888>
+  1c:	006283b3          	add	t2,t0,t1
+  20:	00036293          	ori	t0,t1,0
+  24:	0003e313          	ori	t1,t2,0
+  28:	00652023          	sw	t1,0(a0)
+  2c:	00950533          	add	a0,a0,s1
+  30:	01e50463          	beq	a0,t5,38 <check>
+  34:	fe0004e3          	beqz	zero,1c <_start+0x1c>
+
+00000038 <check>:
+  38:	00106293          	ori	t0,zero,1
+  3c:	00106313          	ori	t1,zero,1
+  40:	80002537          	lui	a0,0x80002
+  44:	10050513          	addi	a0,a0,256 # 80002100 <__global_pointer$+0x80000888>
+  48:	006283b3          	add	t2,t0,t1
+  4c:	00036293          	ori	t0,t1,0
+  50:	0003e313          	ori	t1,t2,0
+  54:	00052e03          	lw	t3,0(a0)
+  58:	01c30463          	beq	t1,t3,60 <check+0x28>
+  5c:	00000c63          	beqz	zero,74 <end>
+  60:	00950533          	add	a0,a0,s1
+  64:	01e50463          	beq	a0,t5,6c <succ>
+  68:	fe0000e3          	beqz	zero,48 <check+0x10>
+
+0000006c <succ>:
+  6c:	55506313          	ori	t1,zero,1365
+  70:	00652023          	sw	t1,0(a0)
+
+00000074 <end>:
+  74:	00000063          	beqz	zero,74 <end>
